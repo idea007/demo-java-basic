@@ -29,21 +29,19 @@ public class ExecutorsUnitTest {
 
         @Override
         public void run() {
-            String pattern = "HH:mm:ss";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            LogExtKt.println(this, "start " + taskName + " " + simpleDateFormat.format(System.currentTimeMillis()));
+            LogExtKt.println(this, "start " + taskName);
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            LogExtKt.println(this, "end " + taskName + " " + simpleDateFormat.format(System.currentTimeMillis()));
+            LogExtKt.println(this, "end " + taskName);
         }
     }
 
     @Test
     public void test_threadPoolExecutor() {
-        // 当 任务数 < corePoolSize+ queueCapacity
+        // 当任务数 < corePoolSize+ queueCapacity
         // 使用核心线程执行任务，其他任务在阻塞队列等待
         int corePoolSize = 5;
         int maxPoolSize = 10;
@@ -91,8 +89,7 @@ public class ExecutorsUnitTest {
 
     @Test
     public void test_threadPoolExecutor2() {
-        // 当 corePoolSize+ queueCapacity  < 任务数 <  maxPoolSize+queueCapacity
-        // 创建 6 个线程执行任务，其他任务在阻塞队列等待
+        //  任务数 > maxPoolSize + queueCapacity,
         int corePoolSize = 5;
         int maxPoolSize = 10;
         long keepAliveTime = 2;
